@@ -22,21 +22,21 @@ public class JdbcTest {
 
         try {
             //加载数据库驱动
-            Class.forName("com.mysql.jdbc.Driver");
+            //Class.forName("com.mysql.jdbc.Driver");
 
             //通过驱动管理类获取数据库链接
-            connection = DriverManager.getConnection("jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8", "root", "linaro");
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/myDb?characterEncoding=utf-8", "root", "root");
             //定义sql语句 ?表示占位符
-            String sql = "select * from user where username = ?";
+            String sql = "select * from teacher where t_id = ?";
             //获取预处理statement
             preparedStatement = connection.prepareStatement(sql);
             //设置参数，第一个参数为sql语句中参数的序号（从1开始），第二个参数为设置的参数值
-            preparedStatement.setString(1, "王五");
+            preparedStatement.setString(1, "1");
             //向数据库发出sql执行查询，查询出结果集
             resultSet = preparedStatement.executeQuery();
             //遍历查询结果集
             while (resultSet.next()) {
-                System.out.println(resultSet.getString("id") + "  " + resultSet.getString("username"));
+                System.out.println(resultSet.getString("t_id") + "  " + resultSet.getString("t_name"));
             }
         } catch (Exception e) {
             e.printStackTrace();
